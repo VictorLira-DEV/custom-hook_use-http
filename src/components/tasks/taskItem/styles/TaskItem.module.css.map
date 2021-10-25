@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,UAAU,CAAC;EACP,aAAa,EAAE,cAAc;EAC7B,OAAO,EAAE,MAAM;CAClB",
+    "sources": [
+        "TaskItem.module.scss"
+    ],
+    "names": [],
+    "file": "TaskItem.module.css"
+}

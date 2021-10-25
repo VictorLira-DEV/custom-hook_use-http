@@ -1,55 +1,48 @@
-import AddNewTask from "./components/AddNewTask";
-import TaskList from './components/TaskList'
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import useHttp from "./hooks/use-http";
+import TasksList from "./components/tasks/taskList/TaskList";
+import NewItem from "./components/tasks/newItem/NewItem";
 
-interface ITaskListData {
+interface ISendRequest {
     id: string;
     text: string;
 }
-function App() {
-    const [allTasks, setAllTasks] = useState<ITaskListData[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [httpError, setHttpError] = useState({
-        hasError: false,
-        message: "",
-    });
 
-    const addTask = (task: {}) => {
-        console.log(task);
-    };
+function App() {
+    const { sendRequest: getRequest } = useHttp();
+    const [tasks, setTasks] = useState<ISendRequest[]>([]);
 
     useEffect(() => {
-        const taskListData: ITaskListData[] = [];
+        const transformData = (tasks: any) => {
+            const transformedData: ISendRequest[] = [];
+            for (const i in tasks) {
+                transformedData.push({ id: i, text: tasks[i].text });
+            }
+            setTasks(transformedData);
+        };
 
-        try {
-            const fetchTasks = async () => {
-                const response = await fetch(
-                    "https://react-http-d779a-default-rtdb.firebaseio.com/tasks.json"
-                );
-                if (!response.ok) {
-                    throw new Error("something went");
-                }
-                const data = await response.json();
-                for (const task in data) {
-                    taskListData.push({ id: task, text: data[task].text });
-                }
-                setAllTasks(taskListData)
-                setIsLoading(false);
-  
-            };
-
-            fetchTasks();
-        } catch (error) {
-            setHttpError({ hasError: true, message: "Something went wrong" });
-            setIsLoading(false);
-        }
+        getRequest(
+            {
+                url: "https://react-http-d779a-default-rtdb.firebaseio.com/tasks.json",
+            },
+            transformData
+        );
     }, []);
 
+    const addNewTask = (newTask: { id: string; text: string }) => {
+        setTasks((prev) => {
+            const newTasks = [...prev];
+            return newTasks.concat(newTask);
+        });
+    };
+
     return (
-        <div className="app">
-            <AddNewTask onAddTasks={addTask} />
-            <TaskList tasks={allTasks} />
-        </div>
+        <React.Fragment>
+            <main>
+                <NewItem onAddNewTask={addNewTask} />
+                <TasksList items={tasks} />
+            </main>
+        </React.Fragment>
     );
 }
 

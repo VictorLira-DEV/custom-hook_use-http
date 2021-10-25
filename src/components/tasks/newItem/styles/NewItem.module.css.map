@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACV,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,aAAa,EAAE,IAAK;CAcvB;;AAjBD,AAII,aAJS,CAIT,KAAK,CAAA;EACD,OAAO,EAAE,IAAI;EACb,SAAS,EAAE,IAAI;EACf,OAAO,EAAE,IAAI;CAShB;;AAhBL,AAQQ,aARK,CAIT,KAAK,AAIA,MAAM,CAAA;EACH,UAAU,EAAE,OAAkB;EAC9B,MAAM,EAAE,GAAG,CAAC,KAAK,CAAC,OAAiB;CACtC",
+    "sources": [
+        "NewItem.module.scss"
+    ],
+    "names": [],
+    "file": "NewItem.module.css"
+}

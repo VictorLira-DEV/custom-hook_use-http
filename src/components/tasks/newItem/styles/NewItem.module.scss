@@ -1,0 +1,18 @@
+.form-control {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px ;
+    input{
+        padding: 10px;
+        font-size: 16px;
+        outline: none;
+        &:focus{
+            background: rgb(239, 251, 253);
+            border: 2px solid rgb(36, 199, 228);
+        }
+        // &:active{
+        //     outline: none;
+        //     border-color: red;
+        // }
+    }
+}
